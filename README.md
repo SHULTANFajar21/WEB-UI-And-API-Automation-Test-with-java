@@ -1,17 +1,23 @@
 CARA MENJALANKAN TEST
+
 1. Clone repository
 
   git clone https://github.com/SHULTANFajar21/WEB-UI-And-API-Automation-Test.git
 
 2. Buka project menggunakan IntelliJ IDEA atau IDE java lainnya
+
 3. Menjalankan Test
+   
    .untuk menjalankan semua test
 
      ./gradlew automationTest
 
 
 
+
+
 TOOLS DAN LIBRARY YANG DIGUNAKAN
+
 
 
 
@@ -29,7 +35,10 @@ TOOLS DAN LIBRARY YANG DIGUNAKAN
 
 
 
+
+
 PROJECT STUCTURE
+
 
 
 . src/test/java/helper/JSONSchemaData: Tempat menyimpan kelas atau file yang berhubungan dengan pengolahan atau validasi data JSON menggunakan JSON Schema.
@@ -46,7 +55,10 @@ PROJECT STUCTURE
 
 
 
+
+
 IMPLEMENTATION
+
 
 
 . page object model(POM): Setiap halaman direpresentasikan sebagai kelas java terpisah di dalam paket 'page'. contoh 'WebPage.java' akan berisi metode untuk berinteraksi dengan elemen di halaman berbeda.
@@ -59,7 +71,10 @@ IMPLEMENTATION
 
 
 
+
+
 INFORMASI PENTING LAINNYA
+
 
 
 . Pastikan telah menginstal JDK, IntelliJ IDEA, dan Git di PC/laptop Anda sebelum menjalankan test.
