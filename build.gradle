@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'io.rest-assured:json-path:5.3.0'
+    testImplementation 'io.rest-assured:json-schema-validator:5.3.0'
+
+    implementation group: 'org.json', name: 'json', version: '20240303'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.0'
+
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.12.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.12.0'
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version:'5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+}
+
+
+
+configurations{
+    cucumberRuntime{
+        extendsFrom testImplementation
+    }
+}
+
+def tags = (findProperty('tags') == null) ? 'not @exclude' : findProperty('tags') + ' and not @exclude'
+
+
+tasks.register('automationTest'){
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:reports/automation-test-report.html',
+                    '--glue', 'stepDef',
+                    '--tags', "@api",
+                    '--tags', "${tags}",
+                    'src/test/resources'
+            ]
+        }
+    }
+}
