@@ -53,7 +53,6 @@ tasks.register('automationTest'){
                     '--plugin', 'pretty',
                     '--plugin', 'html:reports/automation-test-report.html',
                     '--glue', 'stepDef',
-                    '--tags', "@api",
                     '--tags', "${tags}",
                     'src/test/resources'
             ]

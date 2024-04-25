@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty"},
         glue = {"stepDef"},
         features = {"src/test/resources"},
-        tags = "@api, @web"
+        tags = "${tags}"
 
 
 )
